@@ -1,0 +1,18 @@
+title: "01_data-import"
+output:
+  github_document:
+  toc: true
+  toc_depth: 2
+---
+
+# Downloading the Standard Operating Procedure example data
+```{bash}
+wget https://mothur.s3.us-east-2.amazonaws.com/wiki/miseqsopdata.zip
+```
+
+
+#decompress the data
+```{bash}
+unzip miseqsopdata.zip
+```
+
