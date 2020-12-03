@@ -1,0 +1,89 @@
+---
+title: "metabarcoding with dada2: environment installation"
+output:
+  github_document:
+  toc: true
+  toc_depht: 2
+---
+
+# update VM configuration
+``` {bash}
+sudo apt-get update -y 
+sudo apt-get install -y libbz2-dev
+sudo apt-get install -y liblzma-dev
+```
+
+#package install
+
+Following instruction on https://benjjneb.github.io/dada2/dada-installation.html
+#précède a installé une première version de dada2 et à obtenir la version actuelle de dada2 en mettant à jour vers Bioconductor 3.11 
+
+```{r package install}
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+BiocManager::install(version = '3.11')
+BiocManager::install("dada2", version = "3.11")
+```
+
+#phangorn: package pour la reconstruction et l'analyse phylogénétique. phangorn offre la possibilité de reconstruire des phylogénies avec des méthodes basées sur la distance, la parcimonie maximale ou le maximum de vraisemblance (ML) et d'effectuer une conjugaison Hadamard..
+
+```{r}
+BiocManager::install("phangorn")
+```
+
+#DECIPHER :ensemble d'outils logiciels qui peut être utilisé pour déchiffrer et gérer efficacement des séquences biologiques
+```{r}
+BiocManager::install("DECIPHER")
+```
+
+#Fournit un certain nombre de fonctions au niveau de l'utilisateur pour travailler avec des Grid graphiques, notamment pour organiser plusieurs tracés basés sur une grille sur une page et dessiner des tableaux
+```{r}
+install.packages("gridExtra")
+```
+
+#Installer quelques packages disponibles pour ces analyses complémentaires
+```{r}
+.cran_packages <- c( "shiny","miniUI", "caret", "pls", "e1071", "ggplot2", "randomForest", "dplyr", "ggrepel", "nlme", "devtools",
+                  "reshape2", "PMA", "structSSI", "ade4",
+                  "ggnetwork", "intergraph", "scales")
+.github_packages <- c("jfukuyama/phyloseqGraphTest")
+.bioc_packages <- c("genefilter", "impute")
+```
+
+#les packages CRAN ne font pas la distinction entre les branches devel et release. afin  d'installer à partir de miroirs CRAN préconfigurés plutôt que de saisir une URL et de s'approvisionner sur le Web.
+```{r}
+install.packages(.cran_packages)
+devtools::install_github(.github_packages)
+BiocManager::install(.bioc_packages)
+library(vegan)
+```
+
+#installer ce package qui fait une estimation modérée du changement de pli et de la dispersion pour les données RNA-seq.
+```{r}
+BiocManager::install("DESeq2")
+```
+
+##Ce package met en œuvre deux techniques récemment développées dans le domaine de l'inférence sélective et simultanée (SSI).
+```{r}
+library(devtools)
+install_local("./structSSI_1.1.1.tar.gz")
+```
+#CRAN est un réseau de serveurs FTP et Web à travers le monde qui stockent des versions identiques et à jour du code et de la documentation pour R.
+```{bash}
+wget https://cran.r-project.org/src/contrib/Archive/structSSI/structSSI_1.1.1.tar.gz
+```
+
+#usethis(=use_release_issue) pour créer une liste de contrôle des tâches d'étude
+```{r}
+install.packages("usethis")
+```
+
+```{r}
+library(usethis)
+use_git_config(user.name = "Masmoudi-FZ", user.email = "fatizohra.masmoudi@gmail.com")
+```
+
+```{r}
+save.image (file = "my_work_space.RData")
+```
+
